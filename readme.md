@@ -10,18 +10,18 @@ This code is python3.(I didn't check for python2)
 Presetting
 ---
 
-1. pre setting in postgresql.conf 
+# pre setting in postgresql.conf 
 
     log_destination = 'csvlog'
     (or)
     log_destination = 'stderr, csvlog'
 
-2. Install Redis
+#Install Redis
 
 Install
 ---
 
-1. Make python virtualenv
+# Make python virtualenv
 
     mkdir pgcsvlog_parser
     [python3/bin/]pyvenv pgcsvlog_parser
@@ -32,7 +32,7 @@ Install
     cd app
     python pgcsvlog_parser.py
 
-2. check Redis
+# check Redis
 
     redis-cli info
 
