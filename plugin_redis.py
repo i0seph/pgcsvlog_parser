@@ -121,6 +121,7 @@ def dump_pglog(csv_data, redis_dbs, redis_pipes, duration_arr):
         redis_pipes[logname].set(k, csv_data)
 
     if logname and k:
+        # set expire time at 1 hour logs
         tmptime = datetime.datetime.strptime(csv_data['log_time'], '%Y-%m-%d %H:%M:%S.%f %Z') + datetime.timedelta(hours=1)
         redis_pipes[logname].expireat(k,int(tmptime.timestamp()))
         
@@ -130,9 +131,9 @@ class pglog_saver():
     global logtype
     redis_dbs = {}
     redis_pipes = {}
-    # {'last':'lasttime', 'time':{'select':[0,0,0,0], 'update':[0,0,0,0], ...}}
     duration_arr = {'lastctime': 0}
     def  __init__(self):
+        # redis connection
         i = 0
         for logname in logtype:
             self.redis_dbs[logname] = redis.Redis(db=i)
